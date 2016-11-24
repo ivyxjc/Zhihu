@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="zhihu">
+        <item>知乎电子书</item>
+        <item>知乎日报</item>
+        <item>知识青年</item>
+        <item>知乎日爆</item>
+    </string-array>
+
+    <string-array name="develop">
+        <item>Android Weekly</item>
+        <item>AndroidDeveloper</item>
+        <item>开发技术前线</item>
+        <item>Android 科学院</item>
+        <item>C++</item>
+        <item>前端外刊评论</item>
+        <item>程序员的自我修养</item>
+    </string-array>
+</resources>
