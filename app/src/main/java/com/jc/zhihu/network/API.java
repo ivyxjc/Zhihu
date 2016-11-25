@@ -1,7 +1,7 @@
 package com.jc.zhihu.network;
 
-import com.jc.zhihu.Model.DetailModel;
-import com.jc.zhihu.Model.ListModel;
+import com.jc.zhihu.model.DetailModel;
+import com.jc.zhihu.model.ListModel;
 
 import java.util.List;
 

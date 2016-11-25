@@ -17,9 +17,10 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <style name="AppTheme.DAY" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme.DAY" parent="AppTheme.NoActionBar">
         <item name="listTextColor">@color/listTextColor</item>
         <item name="detailTextColor">@color/detailTextColor</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
 </resources>

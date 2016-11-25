@@ -1,4 +1,4 @@
-package com.jc.zhihu.Model;
+package com.jc.zhihu.model;
 
 /**
  * Created by jc on 11/24/2016.

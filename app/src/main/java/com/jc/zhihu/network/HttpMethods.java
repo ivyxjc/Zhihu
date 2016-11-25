@@ -33,10 +33,12 @@ public class HttpMethods {
         private static final OkHttpClient sOkHttp=new OkHttpClient.Builder().connectTimeout(DEFAULT_TIMEOUT,TimeUnit.SECONDS).build();
     }
 
+    //单例
     public static OkHttpClient getOkHttp(){
         return OkHttpStaticHolder.sOkHttp;
     }
 
+    //单例
     public static Retrofit getRetrofit(){
         return RetrofitStaticHolder.sRetrofit;
     }
