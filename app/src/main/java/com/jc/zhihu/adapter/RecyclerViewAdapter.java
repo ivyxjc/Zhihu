@@ -2,12 +2,17 @@ package com.jc.zhihu.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jc.zhihu.R;
+import com.jc.zhihu.TAG;
 import com.jc.zhihu.model.ListModel;
+import com.jc.zhihu.utils.LoadImageUtil;
 
 import java.util.List;
 import java.util.MissingFormatArgumentException;
@@ -44,7 +49,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View view= LayoutInflater.from(mContext)
+                .inflate(R.layout.item_list,parent,false);
+        return new ItemViewHolder(view);
     }
 
     @Override
@@ -68,7 +75,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public ItemViewHolder(View itemView){
             super(itemView);
             itemView.setOnClickListener(this);
-            mItem=datas.get(getLayoutPosition());
+            Log.i(TAG.RECYCLER_VIEW_ADAPTER_TAG,getLayoutPosition()+"");
+//            mItem=datas.get(getLayoutPosition());
         }
 
         @Override
@@ -77,7 +85,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
 
         public void update(){
-            //// TODO: 2016/11/25
+            // TODO: 2016/11/25
+            mItem=datas.get(1);
+            mTextView=(TextView)itemView.findViewById(R.id.list_text);
+            mImageView=(ImageView)itemView.findViewById(R.id.list_image);
+            mTextView.setText(mItem.getTitle());
+            LoadImageUtil.load(mContext,mImageView,mItem.getTitleImage());
         }
     }
 }

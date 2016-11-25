@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.jc.zhihu.R;
@@ -78,6 +79,7 @@ public class ListActivity extends BaseActivity {
                     @Override
                     public void onNext(List<ListModel> listModels) {
                         Toast.makeText(getApplication(),"success",Toast.LENGTH_LONG).show();
+                        Log.i("ssss",listModels.get(0).getTitleImage()+" "+listModels.get(0).getDetailUrl());
                         datas=listModels;
                         notifyDatasetChanged();
                     }
