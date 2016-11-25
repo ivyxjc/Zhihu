@@ -12,7 +12,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
  * This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  */
 
-public class LoadImageUtil {
+public class ImageLoadUtil {
     public static void load(Context context, ImageView imageView,String url){
         RequestManager requestManager= Glide.with(context);
         requestManager

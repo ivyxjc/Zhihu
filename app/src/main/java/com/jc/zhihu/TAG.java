@@ -7,4 +7,6 @@ package com.jc.zhihu;
 
 public class TAG {
     public final static String RECYCLER_VIEW_ADAPTER_TAG="recycler_view_tag";
+
+    public final static String DETAIL_ACTIVITY="detail_activity";
 }

@@ -22,7 +22,7 @@
 
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/detail_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:srcCompat="@android:drawable/ic_menu_report_image"/>
@@ -38,13 +38,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <android.support.design.widget.CoordinatorLayout
+            <ProgressBar
+                android:id="@+id/detail_progress_bar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="2dp"/>
 
-            </android.support.design.widget.CoordinatorLayout>
+            <WebView
+                android:id="@+id/detail_webview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/webview_margin_left"
+                android:layout_marginRight="@dimen/webview_margin_right"
+                android:layout_marginBottom="@dimen/webview_margin_bottom"/>
         </LinearLayout>
+
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton

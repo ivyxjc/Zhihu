@@ -12,10 +12,9 @@ import android.widget.TextView;
 import com.jc.zhihu.R;
 import com.jc.zhihu.TAG;
 import com.jc.zhihu.model.ListModel;
-import com.jc.zhihu.utils.LoadImageUtil;
+import com.jc.zhihu.utils.ImageLoadUtil;
 
 import java.util.List;
-import java.util.MissingFormatArgumentException;
 
 /**
  * Created by ivyxjc on on 2016/11/25.
@@ -56,7 +55,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((ItemViewHolder)holder).update();
+        ((ItemViewHolder)holder).update(position);
     }
 
     @Override
@@ -76,7 +75,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             super(itemView);
             itemView.setOnClickListener(this);
             Log.i(TAG.RECYCLER_VIEW_ADAPTER_TAG,getLayoutPosition()+"");
-//            mItem=datas.get(getLayoutPosition());
+
         }
 
         @Override
@@ -84,13 +83,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             mCallback.onClick(mItem.getDetailUrl(),mItem.getTitle(),mItem.getTitleImage());
         }
 
-        public void update(){
-            // TODO: 2016/11/25
-            mItem=datas.get(1);
+        public void update(int position){
+            mItem=datas.get(position);
             mTextView=(TextView)itemView.findViewById(R.id.list_text);
             mImageView=(ImageView)itemView.findViewById(R.id.list_image);
             mTextView.setText(mItem.getTitle());
-            LoadImageUtil.load(mContext,mImageView,mItem.getTitleImage());
+            ImageLoadUtil.load(mContext,mImageView,mItem.getTitleImage());
         }
     }
 }

@@ -28,6 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
 
+
         DrawerLayout drawer=(DrawerLayout)findViewById(getDrawerLayouId());
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer,  R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -36,11 +37,18 @@ public abstract class BaseActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView)findViewById(getNavigationViewId());
         navigationView.setNavigationItemSelectedListener(this);
+
+        initView();
+        initData();
+        setView();
     }
 
 
+    protected abstract void initView();
 
-    protected abstract void notifyDatasetChanged();
+    protected abstract void setView();
+
+    protected abstract void initData();
 
     protected abstract int getLayoutId();
 
