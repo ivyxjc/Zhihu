@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -17,17 +16,15 @@ import com.jc.zhihu.Constant;
 import com.jc.zhihu.R;
 
 import com.jc.zhihu.TAG;
-import com.jc.zhihu.base.BaseActivity;
-import com.jc.zhihu.model.DetailModel;
+import com.jc.zhihu.base.BaseDetailActiivty;
+import com.jc.zhihu.base.BaseListActivity;
 import com.jc.zhihu.utils.ImageLoadUtil;
-
-import java.util.List;
 
 /**
  * Created by jc on 11/24/2016.
  */
 
-public class DetailActivity extends BaseActivity{
+public class DetailActivity extends BaseDetailActiivty {
 
     private ImageView mImageView;
     private WebView mWebView;
@@ -102,14 +99,7 @@ public class DetailActivity extends BaseActivity{
         return R.layout.activity_detail;
     }
 
-    @Override
-    protected int getDrawerLayouId() {
-        return R.id.detail_drawer_layout;
-    }
 
-    @Override
-    protected int getNavigationViewId() {
-        return R.id.detail_nav_view;
-    }
+
 
 }

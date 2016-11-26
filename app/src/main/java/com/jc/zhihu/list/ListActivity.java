@@ -5,13 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
 
 import com.jc.zhihu.Constant;
 import com.jc.zhihu.R;
 import com.jc.zhihu.adapter.RecyclerViewAdapter;
-import com.jc.zhihu.base.BaseActivity;
+import com.jc.zhihu.base.BaseListActivity;
 import com.jc.zhihu.detail.DetailActivity;
 import com.jc.zhihu.model.ListModel;
 import com.jc.zhihu.network.API;
@@ -29,7 +28,7 @@ import rx.schedulers.Schedulers;
  * This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  */
 
-public class ListActivity extends BaseActivity {
+public class ListActivity extends BaseListActivity {
 
     private RecyclerView mRecyclerView;
     private List<ListModel> datas;
@@ -39,7 +38,9 @@ public class ListActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.status_bar_color));
 
+        getWindow() .getDecorView() .setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
         initData();
         setAdapter();

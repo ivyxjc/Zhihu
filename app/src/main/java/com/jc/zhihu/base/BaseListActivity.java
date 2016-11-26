@@ -1,5 +1,7 @@
 package com.jc.zhihu.base;
 
+import android.app.ActionBar;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
@@ -10,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.jc.zhihu.R;
 
@@ -21,12 +24,14 @@ import java.util.List;
  * This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
  */
 
-public abstract class BaseActivity extends AppCompatActivity
+public abstract class BaseListActivity extends AppCompatActivity
                                     implements NavigationView.OnNavigationItemSelectedListener{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+
+
 
 
         DrawerLayout drawer=(DrawerLayout)findViewById(getDrawerLayouId());

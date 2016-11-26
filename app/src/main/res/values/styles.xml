@@ -21,6 +21,7 @@
         <item name="listTextColor">@color/listTextColor</item>
         <item name="detailTextColor">@color/detailTextColor</item>
         <item name="android:windowIsTranslucent">true</item>
+
     </style>
 
 </resources>
