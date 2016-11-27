@@ -28,7 +28,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private OnItemClickListener mCallback;
 
     public interface OnItemClickListener{
-        void onClick(String url,String title,String titleImage);
+        void onClick(String url,String title,String titleImage,int slug);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener){
@@ -80,7 +80,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         public void onClick(View view) {
-            mCallback.onClick(mItem.getDetailUrl(),mItem.getTitle(),mItem.getTitleImage());
+            mCallback.onClick(mItem.getDetailUrl(),mItem.getTitle(),mItem.getTitleImage(),mItem.getSlug());
         }
 
         public void update(int position){

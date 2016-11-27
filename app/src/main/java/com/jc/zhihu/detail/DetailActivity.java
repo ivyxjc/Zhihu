@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -12,13 +13,22 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+
 import com.jc.zhihu.Constant;
 import com.jc.zhihu.R;
 
 import com.jc.zhihu.TAG;
 import com.jc.zhihu.base.BaseDetailActiivty;
-import com.jc.zhihu.base.BaseListActivity;
+import com.jc.zhihu.model.DetailModel;
+import com.jc.zhihu.network.API;
+import com.jc.zhihu.network.HttpMethods;
+import com.jc.zhihu.utils.HtmlUtil;
 import com.jc.zhihu.utils.ImageLoadUtil;
+
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by jc on 11/24/2016.
@@ -30,14 +40,23 @@ public class DetailActivity extends BaseDetailActiivty {
     private WebView mWebView;
     private ProgressBar mProgressBar;
 
+
+    private int mSlug;
     private String mUrl;
     private String mTitleImage;
     private String mTitle;
+    private String mHtmlContent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(TAG.DETAIL_ACTIVITY,mUrl);
+
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        setSupportActionBar(mToolbar);
+
+        initView();
+        initData();
+        setView();
     }
 
 
@@ -48,7 +67,32 @@ public class DetailActivity extends BaseDetailActiivty {
         mUrl=bundle.getSerializable(Constant.LIST_DETAIL_DETAIL_URL).toString();
         mTitle=bundle.getSerializable(Constant.LIST_DETAIL_TITLE).toString();
         mTitleImage=bundle.getSerializable(Constant.LIST_DETAIL_TITLE_IMAGE).toString();
-        mUrl="https://zhuanlan.zhihu.com"+mUrl;
+        mSlug=Integer.parseInt(bundle.getSerializable(Constant.LIST_DETAIL_SLUG).toString());
+
+        API.ZhihuService zhihuService=(HttpMethods.getRetrofit()).create(API.ZhihuService.class);
+        zhihuService.getDetail(mSlug)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<DetailModel>() {
+                    @Override
+                    public void onCompleted() {
+                        //todo
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        // TODO: 11/26/2016
+                    }
+
+                    @Override
+                    public void onNext(DetailModel detailModel) {
+                        mHtmlContent=detailModel.getContent();
+                        Log.i(TAG.DETAIL_ACTIVITY,"mslug: "+mSlug);
+                        Log.i(TAG.DETAIL_ACTIVITY,"conent: "+detailModel.getContent());
+                        mWebView.loadDataWithBaseURL(null, HtmlUtil.getHtml(mHtmlContent),HtmlUtil.getMimeType(),HtmlUtil.getCoding(),null);
+                    }
+                });
+
     }
 
     @Override
@@ -87,8 +131,7 @@ public class DetailActivity extends BaseDetailActiivty {
 
     @Override
     protected void setView() {
-//        mWebView.loadUrl(mUrl);
-        mWebView.loadUrl("file:///android_asset/zhihu.html");
+
         ImageLoadUtil.load(getApplication(),mImageView,mTitleImage);
     }
 

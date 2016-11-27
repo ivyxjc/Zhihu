@@ -22,9 +22,7 @@ public abstract class BaseDetailActiivty extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
 
-        initView();
-        initData();
-        setView();
+
     }
 
 

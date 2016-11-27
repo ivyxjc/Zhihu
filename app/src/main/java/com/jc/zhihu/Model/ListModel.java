@@ -9,6 +9,24 @@ public class ListModel {
     private String titleImage;
     private String url;
 
+    private int slug;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public int getSlug() {
+        return slug;
+    }
+
+    public void setSlug(int slug) {
+        this.slug = slug;
+    }
+
     public String getTitleImage() {
         return titleImage;
     }

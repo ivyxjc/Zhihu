@@ -6,8 +6,9 @@ package com.jc.zhihu;
 
 public class Constant {
 
-    public static String LIST_DETAIL_TITLE_IMAGE ="title_image_list_detail";
-    public static String LIST_DETAIL_TITLE="title_list_detail";
-    public static String LIST_DETAIL_DETAIL_URL ="deatil_url_list_detail";
+    public static final String LIST_DETAIL_TITLE_IMAGE ="title_image_list_detail";
+    public static final String LIST_DETAIL_TITLE="title_list_detail";
+    public static final String LIST_DETAIL_DETAIL_URL ="deatil_url_list_detail";
+    public static final String LIST_DETAIL_SLUG="list_detail_slug";
 
 }

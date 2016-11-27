@@ -5,4 +5,13 @@ package com.jc.zhihu.model;
  */
 
 public class DetailModel {
+    private String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }
