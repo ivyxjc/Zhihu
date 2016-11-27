@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/tab_height"
 
-            android:background="?attr/colorPrimary"
+            android:background="?attr/colorPrimaryDark"
             android:elevation="6dp"
             android:minHeight="?attr/actionBarSize"/>
 

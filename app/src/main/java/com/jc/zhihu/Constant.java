@@ -11,4 +11,6 @@ public class Constant {
     public static final String LIST_DETAIL_DETAIL_URL ="deatil_url_list_detail";
     public static final String LIST_DETAIL_SLUG="list_detail_slug";
 
+    public static final String FRAGMENT_LIST_TAB="fragment_list_tab";
+
 }

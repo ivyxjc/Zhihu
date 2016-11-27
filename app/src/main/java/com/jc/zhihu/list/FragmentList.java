@@ -38,6 +38,15 @@ public class FragmentList extends Fragment {
     private List<ListModel> datas;
     private RecyclerViewAdapter mAdapter;
 
+    public static FragmentList newInstance(String suffix){
+        FragmentList fragment=new FragmentList();
+        Bundle bundle=new Bundle();
+        bundle.putString(Constant.FRAGMENT_LIST_TAB,suffix);
+        fragment.setArguments(bundle);
+        return fragment;
+
+    }
+
 
     @Nullable
     @Override
@@ -52,7 +61,7 @@ public class FragmentList extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData("xitucircle");
+        initData();
         setAdapter();
     }
 
@@ -74,8 +83,15 @@ public class FragmentList extends Fragment {
     }
 
 
-    protected void initData(String suffix){
+    protected void initData(){
 
+        Bundle bundle=getArguments();
+
+        String suffix;
+        if (bundle!=null && !bundle.isEmpty()) {
+             suffix= bundle.getString(Constant.FRAGMENT_LIST_TAB);
+        }
+        suffix="xitucircle";
         datas=new ArrayList<>();
 
         API.ZhihuService zhihuService=(HttpMethods.getRetrofit()).create(API.ZhihuService.class);

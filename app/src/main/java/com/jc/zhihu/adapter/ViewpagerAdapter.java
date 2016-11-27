@@ -3,6 +3,9 @@ package com.jc.zhihu.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.ListFragment;
+
+import com.jc.zhihu.list.FragmentList;
 
 import java.util.List;
 
@@ -12,9 +15,9 @@ import java.util.List;
 
 public class ViewpagerAdapter extends FragmentStatePagerAdapter {
 
-    private List<String> mSuffixs;
+    private String[] mSuffixs;
 
-    public ViewpagerAdapter(FragmentManager fm,List<String> suffixs){
+    public ViewpagerAdapter(FragmentManager fm,String[] suffixs){
         super(fm);
         mSuffixs=suffixs;
 
@@ -23,11 +26,15 @@ public class ViewpagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return null;
+        String suffix=mSuffixs[position];
+
+        FragmentList fragment=FragmentList.newInstance(suffix);
+
+        return fragment;
     }
 
     @Override
     public int getCount() {
-        return mSuffixs.size();
+        return mSuffixs.length;
     }
 }
