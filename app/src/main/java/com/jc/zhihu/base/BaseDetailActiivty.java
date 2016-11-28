@@ -25,7 +25,6 @@ public abstract class BaseDetailActiivty extends AppCompatActivity{
 
     }
 
-
     protected abstract void initView();
 
     protected abstract void setView();

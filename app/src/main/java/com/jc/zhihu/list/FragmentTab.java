@@ -51,7 +51,7 @@ public class FragmentTab extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_list,container,false);
+        View view=inflater.inflate(R.layout.fragment_list_tab,container,false);
         mRecyclerView=(RecyclerView)view.findViewById(R.id.list_rv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mView=view;
