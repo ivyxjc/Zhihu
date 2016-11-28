@@ -18,7 +18,7 @@ import com.jc.zhihu.Constant;
 import com.jc.zhihu.R;
 
 import com.jc.zhihu.TAG;
-import com.jc.zhihu.base.BaseDetailActiivty;
+import com.jc.zhihu.detail.base.BaseDetailActiivty;
 import com.jc.zhihu.model.DetailModel;
 import com.jc.zhihu.network.API;
 import com.jc.zhihu.network.HttpMethods;
@@ -26,7 +26,6 @@ import com.jc.zhihu.utils.HtmlUtil;
 import com.jc.zhihu.utils.ImageLoadUtil;
 
 import rx.Subscriber;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 

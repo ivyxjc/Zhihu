@@ -14,19 +14,27 @@ import com.jc.zhihu.list.FragmentTab;
 public class ViewpagerAdapter extends FragmentStatePagerAdapter {
 
     private String[] mSuffixs;
+    private String[] mTitles;
 
-    public ViewpagerAdapter(FragmentManager fm,String[] suffixs){
+    public ViewpagerAdapter(FragmentManager fm,String [] titles,String[] suffixs){
         super(fm);
         mSuffixs=suffixs;
+        mTitles=titles;
     }
 
     @Override
     public Fragment getItem(int position) {
         String suffix=mSuffixs[position];
 
-        FragmentTab fragment= FragmentTab.newInstance(suffix);
+        FragmentTab fragment= FragmentTab.newSingleton(suffix);
         Log.i(com.jc.zhihu.TAG.TAG,"position");
         return fragment;
+    }
+
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return mTitles[position];
     }
 
     @Override

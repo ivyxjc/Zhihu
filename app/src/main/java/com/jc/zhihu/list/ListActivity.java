@@ -51,6 +51,7 @@ public class ListActivity extends AppCompatActivity
         Toolbar toolbar=(Toolbar)findViewById(R.id.list_toolbar);
         setSupportActionBar(toolbar);
 
+
         fm=getSupportFragmentManager();
         mTransaction=fm.beginTransaction();
 
@@ -74,16 +75,16 @@ public class ListActivity extends AppCompatActivity
 
         if (id == R.id.nav_android) {
             Log.i(TAG.TAG,"android");
-            replaceFragment(FragmentList.newInstance(R.array.develop,R.array.develop_suffix));
+            replaceFragment(FragmentList.newSingleton(R.array.develop,R.array.develop_suffix));
         } else if (id == R.id.nav_tech) {
             Log.i(TAG.TAG,"tech");
-            replaceFragment(FragmentList.newInstance(R.array.tech,R.array.tech_suffix));
+            replaceFragment(FragmentList.newSingleton(R.array.tech,R.array.tech_suffix));
         } else if (id == R.id.nav_book) {
             Log.i(TAG.TAG,"book");
-            replaceFragment(FragmentList.newInstance(R.array.book,R.array.book_suffix));
+            replaceFragment(FragmentList.newSingleton(R.array.book,R.array.book_suffix));
         } else if (id == R.id.nav_movie) {
             Log.i(TAG.TAG,"movie");
-            replaceFragment(FragmentList.newInstance(R.array.movie,R.array.movie_suffix));
+            replaceFragment(FragmentList.newSingleton(R.array.movie,R.array.movie_suffix));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
