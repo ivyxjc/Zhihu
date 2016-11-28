@@ -12,5 +12,7 @@ public class Constant {
     public static final String LIST_DETAIL_SLUG="list_detail_slug";
 
     public static final String FRAGMENT_LIST_TAB="fragment_list_tab";
+    public static final String LIST_ACTIVITY_NAV_TITLE="list_activity_nav_title";
+    public static final String LIST_ACTIVITY_NAV_SUFFIX="list_activity_nav_suffix";
 
 }

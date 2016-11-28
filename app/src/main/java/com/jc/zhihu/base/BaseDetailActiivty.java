@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.jc.zhihu.R;
 
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
+//import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * Created by jc on 11/26/2016.
