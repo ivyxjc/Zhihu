@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -135,14 +137,13 @@ public class DetailActivity extends BaseDetailActiivty {
         ImageLoadUtil.load(getApplication(),mImageView,mTitleImage);
     }
 
-
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_detail;
     }
 
-
-
-
+    @Override
+    protected boolean isNightMode() {
+        return false;
+    }
 }

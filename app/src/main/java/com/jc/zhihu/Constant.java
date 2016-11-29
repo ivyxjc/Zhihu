@@ -17,4 +17,7 @@ public class Constant {
 
     public static final int LIMIT=20;
 
+    public static final int DAY_STYLE=R.style.AppTheme_DAY;
+    public static final int NIGHT_STYLE=R.style.AppTheme_Night;
+
 }

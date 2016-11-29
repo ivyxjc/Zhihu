@@ -10,14 +10,19 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
 
+import com.jc.zhihu.Constant;
 import com.jc.zhihu.R;
 import com.jc.zhihu.TAG;
+import com.jc.zhihu.TransitionActivity;
 import com.jc.zhihu.adapter.RecyclerViewAdapter;
 import com.jc.zhihu.model.ListModel;
+import com.jc.zhihu.utils.NightModeUtil;
 
 import java.util.List;
 
@@ -46,10 +51,33 @@ public class ListActivity extends AppCompatActivity
 
         fm=getSupportFragmentManager();
         mTransaction=fm.beginTransaction();
+        replaceFragment(FragmentTab.newSingleton(R.array.develop,R.array.develop_suffix));
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        SwitchCompat item = (SwitchCompat) navigationView.getMenu().findItem(R.id.night_mode_swithcbtn).getActionView();
+        item.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener(){
+            @Override public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    setTheme(Constant.NIGHT_STYLE);
+                    NightModeUtil.setTheme(Constant.NIGHT_STYLE);
+                    Log.i("aabbaa","ischecked");
+                    recreate();
+                }else{
+                    setTheme(Constant.DAY_STYLE);
+                    NightModeUtil.setTheme(Constant.DAY_STYLE);
+                    Log.i("aabbaa","notchecked");
+                    recreate();
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode());
+                }
+                TransitionActivity.startIntent();
+            }
+        });
     }
+
+
+
 
 
     private void replaceFragment(Fragment fragment){
@@ -64,7 +92,6 @@ public class ListActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-
         if (id == R.id.nav_android) {
             Log.i(TAG.TAG,"android");
             replaceFragment(FragmentTab.newSingleton(R.array.develop,R.array.develop_suffix));
@@ -78,6 +105,8 @@ public class ListActivity extends AppCompatActivity
             Log.i(TAG.TAG,"movie");
             replaceFragment(FragmentTab.newSingleton(R.array.movie,R.array.movie_suffix));
         }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
