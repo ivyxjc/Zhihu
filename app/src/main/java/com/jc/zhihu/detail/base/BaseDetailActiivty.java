@@ -8,7 +8,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.CompoundButton;
 
+import com.jc.zhihu.Constant;
 import com.jc.zhihu.R;
+import com.jc.zhihu.utils.NightModeUtil;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
@@ -27,6 +29,11 @@ public abstract class BaseDetailActiivty extends SwipeBackActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(NightModeUtil.isNigthMode()){
+            setTheme(Constant.NIGHT_STYLE);
+        }else{
+            setTheme(Constant.DAY_STYLE);
+        }
         setContentView(getLayoutId());
 
         mSwipeBackLayout=getSwipeBackLayout();

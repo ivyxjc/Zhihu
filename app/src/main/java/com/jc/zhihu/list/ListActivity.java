@@ -43,10 +43,15 @@ public class ListActivity extends AppCompatActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(NightModeUtil.isNigthMode()){
+            setTheme(Constant.NIGHT_STYLE);
+        }else{
+            setTheme(Constant.DAY_STYLE);
+        }
         setContentView(R.layout.activity_list);
-
         Toolbar toolbar=(Toolbar)findViewById(R.id.list_toolbar);
         setSupportActionBar(toolbar);
+
 
 
         fm=getSupportFragmentManager();
@@ -63,12 +68,12 @@ public class ListActivity extends AppCompatActivity
                     setTheme(Constant.NIGHT_STYLE);
                     NightModeUtil.setTheme(Constant.NIGHT_STYLE);
                     Log.i("aabbaa","ischecked");
-                    recreate();
+//                    recreate();
                 }else{
                     setTheme(Constant.DAY_STYLE);
                     NightModeUtil.setTheme(Constant.DAY_STYLE);
                     Log.i("aabbaa","notchecked");
-                    recreate();
+//                    recreate();
 //                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode());
                 }
                 TransitionActivity.startIntent();

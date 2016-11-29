@@ -2,6 +2,7 @@ package com.jc.zhihu.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.jc.zhihu.App;
 
@@ -15,6 +16,13 @@ public class UIUtils {
     }
     public static void startActivity(Class<?> clz) {
         Intent intent = new Intent(getContext(), clz);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getContext().startActivity(intent);
+    }
+
+    public static void startActivity(Class<?> clz, Bundle bundle) {
+        Intent intent = new Intent(getContext(), clz);
+        intent.putExtras(bundle);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getContext().startActivity(intent);
     }

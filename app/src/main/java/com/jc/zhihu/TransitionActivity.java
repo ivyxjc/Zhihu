@@ -31,6 +31,8 @@ public class TransitionActivity extends Activity {
 //            imageView.setImageBitmap(bitmap);
 //            startAnimation();
 //        }
+
+        startAnimation();
     }
 
 
