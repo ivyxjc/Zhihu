@@ -7,9 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jc.zhihu.Constant;
-import com.jc.zhihu.list.FragmentList;
-
 /**
  * Created by jc on 11/28/2016.
  */
@@ -53,8 +50,8 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initImmediateData();
-        initLazyData();
         initAdapter();
+
     }
 
     @Nullable
@@ -90,12 +87,15 @@ public abstract class BaseFragment extends Fragment {
      * 通过异步方式或其它延迟等方式, 获取到的数据在此方法中. 虽然该方法也会在onCreate()中执行, 但是可能该方法获取到数据时
      * onCreateView()方法已经执行完毕.
      * setView()和initAdapte()可能会在该方法中调用.但是其使用到的变量都应初始化
+     * 获取详细内容信息将limit和offset设置为-1, 若为了获取list则将slug设置为-1
      */
 
-    protected abstract void initLazyData();
+    protected abstract void initLazyData(int limit, int offset, int slug);
 
 
     protected abstract void setView();
+
+
 
     protected abstract int getLayoutId();
 

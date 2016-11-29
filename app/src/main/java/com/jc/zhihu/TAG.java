@@ -11,6 +11,8 @@ public class TAG {
 
     public final static String DETAIL_ACTIVITY="detail_activity";
 
+    public final static String FRAGMENT_TAB ="fragment_tab";
+
     public final static String FRAGMENT_LIST="fragment_list";
 
 }

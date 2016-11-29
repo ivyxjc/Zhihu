@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--day-->
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="listTextColor">#000000</color>
-    <color name="detailTextColor">#000000</color>
+    <color name="color_primary_day">#3F51B5</color>
+    <!--<color name="color_primary_dark_day">#303F9F</color>-->
+    <color name="color_accent_day">#FF4081</color>
+    <color name="list_text_color_day">#000000</color>
+    <color name="detail_text_color_day">#000000</color>
+    <color name="background_color_day">#efefef</color>
 
-    <color name="status_bar_color">#1e303F9F</color>
+
+
     <!--Night-->
+    <color name="color_primary_night">#2f2f2f</color>
+    <!--<color name="color_primary_dark_night">#303F9F</color>-->
+    <color name="color_accent_night">#FF4081</color>
+    <color name="list_text_color_night">#afafaf</color>
+    <color name="detail_text_color_night">#000000</color>
+    <color name="background_color_night">#1f1f1f</color>
+
 
 </resources>

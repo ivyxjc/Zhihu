@@ -1,31 +1,40 @@
 <resources>
 
      <!--Base application theme. -->
-    <style name="AppTheme" parent="DayBaseTheme">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowTranslucentStatus">true</item>
-
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <!--<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>-->
 
-    <!--<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>-->
 
     <style name="AppTheme.DAY" parent="AppTheme.NoActionBar">
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="listTextColor">@color/listTextColor</item>
-        <item name="detailTextColor">@color/detailTextColor</item>
-        <item name="android:windowIsTranslucent">true</item>
+        <item name="toolBarColor">@color/color_primary_day</item>
+        <!--<item name="colorPrimaryDark">@color/color_primary_dark_day</item>-->
+
+        <item name="listTextColor">@color/list_text_color_day</item>
+        <item name="detailTextColor">@color/detail_text_color_day</item>
+        <item name="backgroundColor">@color/background_color_day</item>
+
     </style>
 
-    <style name="DayBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+
+    <style name="AppTheme.Night" parent="AppTheme.NoActionBar">
+
+        <item name="toolBarColor">@color/color_primary_night</item>
+        <!--<item name="colorPrimaryDark">@color/color_primary_dark_night</item>-->
+
+        <item name="listTextColor">@color/list_text_color_night</item>
+        <item name="detailTextColor">@color/detail_text_color_night</item>
+        <item name="backgroundColor">@color/background_color_night</item>
+
     </style>
+
 
 </resources>

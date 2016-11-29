@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
-import com.jc.zhihu.list.FragmentTab;
+import com.jc.zhihu.list.FragmentList;
 
 /**
  * Created by jc on 11/27/2016.
@@ -26,7 +26,7 @@ public class ViewpagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         String suffix=mSuffixs[position];
 
-        FragmentTab fragment= FragmentTab.newSingleton(suffix);
+        FragmentList fragment= FragmentList.newSingleton(suffix);
         Log.i(com.jc.zhihu.TAG.TAG,"position");
         return fragment;
     }

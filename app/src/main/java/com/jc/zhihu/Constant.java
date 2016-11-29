@@ -15,4 +15,6 @@ public class Constant {
     public static final String LIST_ACTIVITY_NAV_TITLE="list_activity_nav_title";
     public static final String LIST_ACTIVITY_NAV_SUFFIX="list_activity_nav_suffix";
 
+    public static final int LIMIT=20;
+
 }

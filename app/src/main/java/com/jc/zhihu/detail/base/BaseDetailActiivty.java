@@ -9,19 +9,26 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.jc.zhihu.R;
 
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
+
 //import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * Created by jc on 11/26/2016.
  */
 
-public abstract class BaseDetailActiivty extends AppCompatActivity{
+public abstract class BaseDetailActiivty extends SwipeBackActivity{
+
+    private SwipeBackLayout mSwipeBackLayout;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
 
+        mSwipeBackLayout=getSwipeBackLayout();
 
     }
 
