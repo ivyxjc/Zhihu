@@ -24,9 +24,13 @@ import com.jc.zhihu.detail.base.BaseDetailActiivty;
 import com.jc.zhihu.model.DetailModel;
 import com.jc.zhihu.network.API;
 import com.jc.zhihu.network.HttpMethods;
+import com.jc.zhihu.utils.CacheUtil;
 import com.jc.zhihu.utils.HtmlUtil;
 import com.jc.zhihu.utils.ImageLoadUtil;
 
+import java.util.ArrayList;
+
+import okhttp3.Cache;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -48,6 +52,8 @@ public class DetailActivity extends BaseDetailActiivty {
     private String mTitle;
     private String mHtmlContent;
 
+    private boolean isDataCached;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,20 +63,44 @@ public class DetailActivity extends BaseDetailActiivty {
         setSupportActionBar(mToolbar);
 
         initView();
-        initData();
+        initImmediateData();
+        //setView可以放在此处是因为, setView()的过程中不需要用到initLazyData()获得的数据
         setView();
+        if(!isDataCached){
+            initLazyData();
+        }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(isDataCached){
+            mWebView.loadDataWithBaseURL(null, HtmlUtil.getHtml(mHtmlContent),HtmlUtil.getMimeType(),HtmlUtil.getCoding(),null);
+        }
+    }
 
     @Override
-    protected void initData(){
+    protected void initImmediateData() {
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
         mUrl=bundle.getSerializable(Constant.LIST_DETAIL_DETAIL_URL).toString();
         mTitle=bundle.getSerializable(Constant.LIST_DETAIL_TITLE).toString();
         mTitleImage=bundle.getSerializable(Constant.LIST_DETAIL_TITLE_IMAGE).toString();
         mSlug=Integer.parseInt(bundle.getSerializable(Constant.LIST_DETAIL_SLUG).toString());
+        mHtmlContent=(String)CacheUtil.load(getApplication(),CacheUtil.calFilename(mSlug));
+        if(mHtmlContent==null){
+            Log.i(TAG.DETAIL_ACTIVITY,"mHtmlContent null");
+        }else {
+            Log.i(TAG.DETAIL_ACTIVITY,mHtmlContent);
+        }
 
+        if(mHtmlContent!=null && mHtmlContent.length()!=0){
+            isDataCached=true;
+        }
+    }
+
+    @Override
+    protected void initLazyData(){
         API.ZhihuService zhihuService=(HttpMethods.getRetrofit()).create(API.ZhihuService.class);
         zhihuService.getDetail(mSlug)
                 .subscribeOn(Schedulers.io())
@@ -89,6 +119,7 @@ public class DetailActivity extends BaseDetailActiivty {
                     @Override
                     public void onNext(DetailModel detailModel) {
                         mHtmlContent=detailModel.getContent();
+                        CacheUtil.save(getApplication(), CacheUtil.calFilename(mSlug),mHtmlContent);
                         Log.i(TAG.DETAIL_ACTIVITY,"mslug: "+mSlug);
                         Log.i(TAG.DETAIL_ACTIVITY,"conent: "+detailModel.getContent());
                         mWebView.loadDataWithBaseURL(null, HtmlUtil.getHtml(mHtmlContent),HtmlUtil.getMimeType(),HtmlUtil.getCoding(),null);
@@ -99,6 +130,7 @@ public class DetailActivity extends BaseDetailActiivty {
 
     @Override
     protected void initView(){
+
         mImageView=(ImageView)findViewById(R.id.detail_image);
         mProgressBar=(ProgressBar)findViewById(R.id.detail_progress_bar);
         mWebView=(WebView)findViewById(R.id.detail_webview);
@@ -120,6 +152,8 @@ public class DetailActivity extends BaseDetailActiivty {
                 mProgressBar.setProgress(newProgress);
             }
         });
+
+
     }
 
     private void initWebView(){
@@ -133,7 +167,6 @@ public class DetailActivity extends BaseDetailActiivty {
 
     @Override
     protected void setView() {
-
         ImageLoadUtil.load(getApplication(),mImageView,mTitleImage);
     }
 

@@ -55,7 +55,6 @@ public class ListActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-
         fm=getSupportFragmentManager();
         mTransaction=fm.beginTransaction();
         replaceFragment(FragmentTab.newSingleton(R.array.develop,R.array.develop_suffix));
@@ -87,9 +86,6 @@ public class ListActivity extends AppCompatActivity
 //                TransitionActivity.startIntent();
             });
     }
-
-
-
 
 
     private void replaceFragment(Fragment fragment){

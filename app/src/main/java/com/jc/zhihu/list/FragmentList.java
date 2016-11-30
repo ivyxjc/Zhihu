@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.jc.zhihu.Constant;
 import com.jc.zhihu.R;
@@ -19,10 +20,12 @@ import com.jc.zhihu.list.base.BaseFragment;
 import com.jc.zhihu.model.ListModel;
 import com.jc.zhihu.network.API;
 import com.jc.zhihu.network.HttpMethods;
+import com.jc.zhihu.utils.CacheUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Cache;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -36,9 +39,10 @@ import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 public class FragmentList extends BaseFragment {
 
     private RecyclerView mRecyclerView;
-    private List<ListModel> datas;
+    private ArrayList<ListModel> datas;
     private RecyclerViewAdapter mRecyclerViewAdapter;
     String suffix;
+
 
     private boolean isAllDataLoaded=false;
 
@@ -75,7 +79,12 @@ public class FragmentList extends BaseFragment {
         }else{
             suffix="daily";
         }
-        datas=new ArrayList<>();
+        datas=(ArrayList<ListModel>) CacheUtil.load(getActivity(), CacheUtil.calFilename(suffix));
+        if(datas!=null && datas.size()!=0){
+            dataLoaded();
+        }else{
+            datas=new ArrayList<>();
+        }
     }
 
 
@@ -107,12 +116,13 @@ public class FragmentList extends BaseFragment {
                     @Override
                     public void onError(Throwable e) {
                         // TODO: 2016/11/29
-                        Log.i(TAG.FRAGMENT_LIST,"onError");
+                        Log.i(TAG.FRAGMENT_LIST,e.toString());
                     }
                     @Override
                     public void onNext(List<ListModel> listModels) {
                         dataLoaded();
                         datas.addAll(listModels);
+                        CacheUtil.save(getActivity(),CacheUtil.calFilename(suffix),datas);
                         if(setView){
                             setView();
                         }

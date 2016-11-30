@@ -15,4 +15,6 @@ public class TAG {
 
     public final static String FRAGMENT_LIST="fragment_list";
 
+    public final static String CACHE_UTIL="cache_util";
+
 }

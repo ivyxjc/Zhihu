@@ -7,6 +7,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.util.ArrayList;
+
 /**
  * Created by ivyxjc on on 2016/11/25.
  * This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.

@@ -46,7 +46,9 @@ public abstract class BaseDetailActiivty extends SwipeBackActivity {
 
     protected abstract void setView();
 
-    protected abstract void initData();
+    protected abstract void initLazyData();
+
+    protected abstract void initImmediateData();
 
     protected abstract int getLayoutId();
 

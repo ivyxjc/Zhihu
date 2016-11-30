@@ -1,10 +1,12 @@
 package com.jc.zhihu.model;
 
+import java.io.Serializable;
+
 /**
  * Created by jc on 11/24/2016.
  */
 
-public class ListModel {
+public class ListModel implements Serializable{
     private String title;
     private String titleImage;
     private String url;
