@@ -1,5 +1,7 @@
 package com.jc.zhihu.list;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -61,24 +63,29 @@ public class ListActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        SwitchCompat item = (SwitchCompat) navigationView.getMenu().findItem(R.id.night_mode_swithcbtn).getActionView();
+        SwitchCompat item=null;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            item = (SwitchCompat) navigationView.getMenu().findItem(R.id.night_mode_swithcbtn).getActionView();
+        }
+
         item.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener(){
             @Override public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     setTheme(Constant.NIGHT_STYLE);
                     NightModeUtil.setTheme(Constant.NIGHT_STYLE);
+                    Intent intent=getIntent();
                     Log.i("aabbaa","ischecked");
 //                    recreate();
-                }else{
+                }else
                     setTheme(Constant.DAY_STYLE);
                     NightModeUtil.setTheme(Constant.DAY_STYLE);
                     Log.i("aabbaa","notchecked");
 //                    recreate();
 //                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode());
                 }
-                TransitionActivity.startIntent();
-            }
-        });
+//                TransitionActivity.startIntent();
+            });
     }
 
 

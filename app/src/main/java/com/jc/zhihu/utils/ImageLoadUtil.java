@@ -17,7 +17,10 @@ public class ImageLoadUtil {
         RequestManager requestManager= Glide.with(context);
         requestManager
                 .load(url)
+                //硬盘存储策略
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
+                //是否启用内存缓存 默认为true
+                .skipMemoryCache(false)
                 .centerCrop()
                 .into(imageView);
     }
