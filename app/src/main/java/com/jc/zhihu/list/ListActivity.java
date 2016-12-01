@@ -21,7 +21,7 @@ import android.widget.CompoundButton;
 import com.jc.zhihu.Constant;
 import com.jc.zhihu.R;
 import com.jc.zhihu.TAG;
-import com.jc.zhihu.TransitionActivity;
+//import com.jc.zhihu.TransitionActivity;
 import com.jc.zhihu.adapter.RecyclerViewAdapter;
 import com.jc.zhihu.model.ListModel;
 import com.jc.zhihu.utils.NightModeUtil;

@@ -43,8 +43,14 @@ public class FragmentList extends BaseFragment {
     private RecyclerViewAdapter mRecyclerViewAdapter;
     String suffix;
 
+    //是否有缓存数据
+    private boolean isDataCached=false;
 
+    //全部数据是否已经下载完成
     private boolean isAllDataLoaded=false;
+
+    //缓存的数据是否已经和新下载的数据中存在相同的, 意味着后面的部分数据已经缓存好了
+    private boolean isDataMatch=false;
 
 
     public static FragmentList newSingleton(String suffix){
@@ -59,7 +65,7 @@ public class FragmentList extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initLazyData(Constant.LIMIT,0,-1);
+
     }
 
     @Override
@@ -81,9 +87,10 @@ public class FragmentList extends BaseFragment {
         }
         datas=(ArrayList<ListModel>) CacheUtil.load(getActivity(), CacheUtil.calFilename(suffix));
         if(datas!=null && datas.size()!=0){
-            dataLoaded();
+            isDataCached=true;
         }else{
             datas=new ArrayList<>();
+            initLazyData(Constant.LIMIT,0,-1);
         }
     }
 
@@ -92,21 +99,21 @@ public class FragmentList extends BaseFragment {
     protected void initLazyData(int limit, final int offset,int slug) {
         if(!isDataLoaded){
             if(limit!=-1&&offset!=-1){
-                initLazyDataFunc(Constant.LIMIT,0,true);
+                initLazyDataFunc(Constant.LIMIT,0);
             }
         }else {
             if (limit != -1 && offset != -1) {
-                initLazyDataFunc(limit,offset,false);
+                initLazyDataFunc(limit,offset);
             }
         }
     }
 
-    private void initLazyDataFunc(int limit, final int offset, final boolean setView){
+    private void initLazyDataFunc(int limit, final int offset){
         API.ZhihuService zhihuService=(HttpMethods.getRetrofit()).create(API.ZhihuService.class);
         zhihuService.getList(suffix,limit,offset)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<ListModel>>() {
+                .subscribe(new Subscriber<ArrayList<ListModel>>() {
                     @Override
                     public void onCompleted() {
                         // TODO: 11/25/2016
@@ -119,15 +126,17 @@ public class FragmentList extends BaseFragment {
                         Log.i(TAG.FRAGMENT_LIST,e.toString());
                     }
                     @Override
-                    public void onNext(List<ListModel> listModels) {
-                        dataLoaded();
-                        datas.addAll(listModels);
-                        CacheUtil.save(getActivity(),CacheUtil.calFilename(suffix),datas);
-                        if(setView){
-                            setView();
+                    public void onNext(ArrayList<ListModel> listModels) {
+                        if(isDataCached&& isDataLoaded==false){
+                            datas=listModels;
+                            dataLoaded();
+                        }else{
+                            datas.addAll(listModels);
+                            CacheUtil.save(getActivity(),CacheUtil.calFilename(suffix),datas);
+                            dataLoaded();
                         }
                         notifyDatasetChanged();
-                        if(listModels.size()<Constant.LIMIT){
+                        if(listModels.size()==0){
                             Log.i(TAG.FRAGMENT_LIST,"list size:" +listModels.size());
                             isAllDataLoaded=true;
                         }
@@ -194,7 +203,7 @@ public class FragmentList extends BaseFragment {
         notifyDatasetChanged(datas);
     }
 
-    private void notifyDatasetChanged(List<ListModel> list){
+    private void notifyDatasetChanged(ArrayList<ListModel> list){
         mRecyclerViewAdapter.refresh(list);
     }
 

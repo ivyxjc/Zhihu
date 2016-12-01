@@ -61,9 +61,7 @@ public abstract class BaseFragment extends Fragment {
             view=inflater.inflate(getLayoutId(),container,false);
         }
         initView();
-        if(isDataLoaded){
-            setView();
-        }
+        setView();
     return view;
 }
 

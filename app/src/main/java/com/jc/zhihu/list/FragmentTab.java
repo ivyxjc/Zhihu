@@ -67,7 +67,6 @@ public class FragmentTab extends BaseFragment {
 
     }
 
-
     @Override
     protected void setView() {
         tabLayout.setupWithViewPager(mViewPager);

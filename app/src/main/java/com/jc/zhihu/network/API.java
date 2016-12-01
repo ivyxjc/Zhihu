@@ -3,6 +3,7 @@ package com.jc.zhihu.network;
 import com.jc.zhihu.model.DetailModel;
 import com.jc.zhihu.model.ListModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,7 +26,7 @@ public class API {
 
     public interface ZhihuService{
         @GET(LIST_API+"{suffix}/posts")
-        Observable<List<ListModel>> getList(@Path("suffix") String suffix, @Query("limit") int limit,@Query("offset") int offset);
+        Observable<ArrayList<ListModel>> getList(@Path("suffix") String suffix, @Query("limit") int limit, @Query("offset") int offset);
 
         @GET(DETAIL_API + "{slug}")
         Observable<DetailModel> getDetail(@Path("slug") int slug);
