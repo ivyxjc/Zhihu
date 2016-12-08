@@ -3,6 +3,7 @@ package com.jc.zhihu.list;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -41,6 +42,7 @@ public class FragmentList extends BaseFragment {
     private RecyclerView mRecyclerView;
     private ArrayList<ListModel> datas;
     private RecyclerViewAdapter mRecyclerViewAdapter;
+    private SwipeRefreshLayout mRefreshLayout;
     String suffix;
 
     //是否有缓存数据
@@ -72,6 +74,7 @@ public class FragmentList extends BaseFragment {
     protected void initView() {
         mRecyclerView=(RecyclerView)view.findViewById(R.id.list_rv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRefreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.listview_refrsh_layout);
     }
 
 
@@ -127,7 +130,7 @@ public class FragmentList extends BaseFragment {
                     }
                     @Override
                     public void onNext(ArrayList<ListModel> listModels) {
-                        if(isDataCached&& isDataLoaded==false){
+                        if(isDataCached && !isDataLoaded){
                             datas=listModels;
                             dataLoaded();
                         }else{
@@ -140,6 +143,8 @@ public class FragmentList extends BaseFragment {
                             Log.i(TAG.FRAGMENT_LIST,"list size:" +listModels.size());
                             isAllDataLoaded=true;
                         }
+
+                        mRefreshLayout.setRefreshing(false);
                     }
                 });
     }
@@ -171,6 +176,18 @@ public class FragmentList extends BaseFragment {
                     Log.i(TAG.FRAGMENT_LIST,"recycleItem: "+mRecyclerViewAdapter.getItemCount());
                     initLazyData(Constant.LIMIT,datas.size(),-1);
                 }
+            }
+        });
+
+
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                isAllDataLoaded=false;
+                isDataLoaded=false;
+                isDataCached=false;
+                datas.clear();
+                initLazyData(Constant.LIMIT,datas.size(),-1);
             }
         });
     }
