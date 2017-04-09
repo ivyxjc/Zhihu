@@ -20,4 +20,4 @@
 
 ## 截图
 
-![](./screenshot.gif)
+ <img src="./screenshot.gif" width = "315" height = "560"  align=center />
